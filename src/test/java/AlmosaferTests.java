@@ -1,37 +1,57 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
 import org.testng.Assert;
+import pages.HomePage;
 
-public class AlmosaferTests extends Almosafer{
+public class AlmosaferTests {
+    private WebDriver driver;
+    private HomePage homePage;
+
     @BeforeTest
-    public void setup(){
-        driver.get(URL);
-    }
-    @Test()
-    public void check_default_language(){
-        WebElement HTML_Page = driver.findElement(By.tagName("html"));
-        String siteLanguage = HTML_Page.getAttribute("lang");
-        Assert.assertTrue(siteLanguage.equals("en") || siteLanguage.equals("ar"), "Unexpected default language: " + siteLanguage);
-    }
-    @Test()
-    public void check_default_currency(){
-        WebElement selectedCurrency = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/header[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]"));
-        Assert.assertEquals(selectedCurrency.getText(), "SAR", "Unexpected default currency: " + selectedCurrency);
-    }
-    @Test
-    public void check_contact_number(){
-        String contactNumber = driver.findElement(By.cssSelector("a[class='sc-gbOuXE bWmXTb'] strong")).getText();
-        Assert.assertEquals(contactNumber,"+966554400000","Unexpected number");
-    }
-    @Test
-    public void check_qitaf_logo_displayed_in_footer(){
-        WebElement logo = driver.findElement(By.cssSelector("[data-testid=\"Footer__QitafLogo\"]"));
-        Assert.assertTrue(logo.isDisplayed(),"Qitaf logo is not displayed");
+    public void setup() {
+        driver = new FirefoxDriver();
+        driver.manage().window().maximize();
+        homePage = new HomePage(driver);
+        driver.get(homePage.PAGE_URL);
     }
 
     @AfterTest
-    public void tearDown(){
+    public void tearDown() {
         driver.quit();
     }
+
+    @Test(priority = 1)
+    public void checkDefaultLanguage() {
+        String siteLanguage = homePage.getSiteLanguage();
+        Assert.assertTrue(siteLanguage.equals("en") || siteLanguage.equals("ar"), "Unexpected default language: " + siteLanguage);
+    }
+
+    @Test(priority = 2)
+    public void checkDefaultCurrency() {
+        String siteCurrency = homePage.getSiteCurrency();
+        Assert.assertEquals(siteCurrency, "SAR", "Unexpected default currency: " + siteCurrency);
+    }
+
+    @Test(priority = 3)
+    public void checkContactNumber() {
+        String contactNumber = homePage.getContactNumber();
+        Assert.assertEquals(contactNumber, "+966554400000", "Unexpected number: " + contactNumber);
+    }
+
+    @Test(priority = 4)
+    public void checkQitafLogoDisplayedInFooter() {
+        boolean isLogoDisplayed = homePage.isQitafLogoDisplayedInFooter();
+        Assert.assertTrue(isLogoDisplayed, "Qitaf logo is not displayed");
+    }
+
+    @Test(priority = 5)
+    public void checkSearchHotelsTabIsNotSelectedByDefault() {
+        boolean isDefaultSelectedTabHotels = homePage.getDefaultSearchTab();
+        Assert.assertFalse(isDefaultSelectedTabHotels, "Search Hotels Tab Is Selected By Default");
+    }
+
+
 }
