@@ -1,6 +1,6 @@
 # Automate-Almosafer
 
-This repository contains automated tests for the [Almosafer](https://www.almosafer.com/en) website. The tests are implemented using Java, TestNG, Selenium WebDriver, and Page Object Model Pattern.
+This repository contains automated tests for [Almosafer](https://www.almosafer.com/en) website. The tests are implemented using Java, TestNG, Selenium WebDriver, and Page Object Model Pattern.
 
 ## Tools
 
