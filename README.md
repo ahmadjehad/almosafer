@@ -1,6 +1,7 @@
 # Automate-Almosafer
 
-This repository contains automated tests for [Almosafer](https://www.almosafer.com/en) website. The tests are implemented using Java, TestNG, Selenium WebDriver, and Page Object Model Pattern.
+This repository contains automated tests for [Almosafer](https://www.almosafer.com/en) website. The tests are
+implemented using Java, TestNG, Selenium WebDriver, and Page Object Model Pattern.
 
 ## Tools
 
@@ -11,20 +12,25 @@ This repository contains automated tests for [Almosafer](https://www.almosafer.c
 
 ## Test Descriptions
 
-### Test 1: Verify 
+### Test 1: checkDefaultLanguage
 
+This test verifies the default language of the site.
 
-### Test 2: Verify 
+### Test 2: checkDefaultCurrency
 
+This test verifies the default currency of the site it should be SAR.
 
-### Test 3: Verify 
+### Test 3: checkContactNumber
 
+This test verifies the contact number of the site in the header.
 
-### Test 4: Verify 
+### Test 4: checkQitafLogoDisplayedInFooter
 
+This test verifies the Qitaf logo is displayed in the site in the footer.
 
-### Test 5: Verify 
+### Test 5: checkSearchHotelsTabIsNotSelectedByDefault
 
+This test verifies the that Hotels tab is not selected by default.
 
 ## License
 
